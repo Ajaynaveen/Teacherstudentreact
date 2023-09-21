@@ -6,5 +6,11 @@
       "id": 1
     }
   ],
-  "teachers": []
+  "teachers": [
+    {
+      "name": "sathishds",
+      "subject": "maths",
+      "id": 1
+    }
+  ]
 }

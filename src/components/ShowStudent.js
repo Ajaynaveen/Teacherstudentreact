@@ -9,22 +9,23 @@ function ShowStudent() {
   const [studentData, setStudentData] = useState({ name: '', age: '' });
 
   useEffect(() => {
-    getStudentDetails(studentId);
+
+    const getStudentDetails = async (studentId) => {
+        try {
+          const student = await getStudentById(studentId);
+          if (student) {
+            setStudentData({ name: student.name, age: student.age });
+          } else {
+            console.error('Student not found');
+          }
+        } catch (error) {
+          console.error('Error fetching student details:', error);
+        }
+      };
+    getStudentDetails();
   }, [getStudentById, studentId]);
 
-  const getStudentDetails = async (studentId) => {
-    try {
-      const student = await getStudentById(studentId);
-      if (student) {
-        setStudentData({ name: student.name, age: student.age });
-      } else {
-        console.error('Student not found');
-      }
-    } catch (error) {
-      console.error('Error fetching student details:', error);
-    }
-  };
-
+  
   return (
     <div>
       <h2>Student Details</h2>

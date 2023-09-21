@@ -9,21 +9,22 @@ function ShowTeacher() {
   const [teacherData, setTeacherData] = useState({ name: '', subject: '' });
 
   useEffect(() => {
-    getTeacherDetails(teacherId);
+    const getTeacherDetails = async () => {
+        try {
+          const teacher = await getTeacherById(teacherId);
+          if (teacher) {
+            setTeacherData({ name: teacher.name, subject: teacher.subject });
+          } else {
+            console.error('Teacher not found');
+          }
+        } catch (error) {
+          console.error('Error fetching teacher details:', error);
+        }
+      };
+    getTeacherDetails();
   }, [getTeacherById, teacherId]);
 
-  const getTeacherDetails = async (teacherId) => {
-    try {
-      const teacher = await getTeacherById(teacherId);
-      if (teacher) {
-        setTeacherData({ name: teacher.name, subject: teacher.subject });
-      } else {
-        console.error('Teacher not found');
-      }
-    } catch (error) {
-      console.error('Error fetching teacher details:', error);
-    }
-  };
+ 
 
   return (
     <div>

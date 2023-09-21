@@ -13,7 +13,7 @@ function EditStudent() {
   
   useEffect(() => {
     getStudentDetails(studentId);
-  }, [getStudentById, studentId]);
+  }, [getStudentById, studentId,getStudentDetails]);
 
   const getStudentDetails = async (studentId) => {
     try {
