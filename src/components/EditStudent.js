@@ -12,18 +12,23 @@ function EditStudent() {
 
   
   useEffect(() => {
-    getStudentDetails(studentId);
-  }, [getStudentById, studentId,getStudentDetails]);
 
-  const getStudentDetails = async (studentId) => {
-    try {
-      const student = await getStudentById(studentId);
-      setStudentData({ name: student.name, age: student.age });
-    } catch (error) {
-      console.error('Error fetching student details:', error);
-    }
-  };
+    const getStudentDetails = async () => {
+        try {
+          const student = await getStudentById(studentId);
+          if (student) {
+            setStudentData({ name: student.name, age: student.age });
+          } else {
+            console.error('Student not found');
+          }
+        } catch (error) {
+          console.error('Error fetching student details:', error);
+        }
+      };
+    getStudentDetails();
+  }, [getStudentById, studentId]);
 
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setStudentData({ ...studentData, [name]: value });

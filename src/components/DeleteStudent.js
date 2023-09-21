@@ -11,7 +11,7 @@ function DeleteStudent() {
 
   useEffect(() => {
 
-    const getStudentDetails = async (studentId) => {
+    const getStudentDetails = async () => {
         try {
           const student = await getStudentById(studentId);
           if (student) {
